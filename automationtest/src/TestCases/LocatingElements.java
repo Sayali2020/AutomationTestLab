@@ -21,7 +21,6 @@ public class LocatingElements extends TestBase {
 	// RegisterUser rs = new RegisterUser(driver,prop);
 
 @Test
-
 public void test() throws InterruptedException, IOException {
 	RegisterUser rs = new RegisterUser(driver);
 	driver.manage().timeouts().implicitlyWait(10,TimeUnit.SECONDS) ;

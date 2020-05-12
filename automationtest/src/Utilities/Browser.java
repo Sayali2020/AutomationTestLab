@@ -22,8 +22,9 @@ import org.openqa.selenium.WebDriver;
 	         			break;
 	         		case "chrome":
 	                     // Set the path for chromedriver.exe
-	                 System.setProperty("webdriver.chrome.driver","C://Users//swatij//Downloads//chromedriver_win32 (1)//chromedriver.exe");
+	                 System.setProperty("webdriver.chrome.driver","C:\\Users\\sayalic\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
 	                               driver = new ChromeDriver();
+	                               driver.manage().window().maximize();
 	         			break;
 	         		case "IE":
 	                     // Set the path for IEdriver.exe
@@ -32,7 +33,7 @@ import org.openqa.selenium.WebDriver;
 	         			break;
 	         		default:
 	         			System.out.println("browser : " + browserType + " is invalid, Launching Firefox as browser of choice..");
-	         		    System.setProperty("webdriver.chrome.driver","C://Users//swatij//Downloads//chromedriver_win32 (1)//chromedriver.exe");
+	         		    System.setProperty("webdriver.chrome.driver","C:\\Users\\sayalic\\Downloads\\chromedriver_win32 (3)\\chromedriver.exe");
 	                     driver = new ChromeDriver();
 	                     driver.manage().window().maximize();
 	                    
