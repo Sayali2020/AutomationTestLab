@@ -73,6 +73,11 @@ public class WebTable extends TestBase {
 	public List<WebElement> getEditButtons(){
 		return getWebTable().findElements(By.cssSelector(prop.getProperty("editButton")));
 	}
+	public int getPagesInTable() {
+		return	Integer.parseInt(driver.findElement(By.cssSelector(".ui-grid-pager-max-pages-number")).getText().substring(2));
+	}
+	
+	WebElement pageNumbers=driver.findElement(By.cssSelector(".ui-grid-pager-max-pages-number"));
 	WebElement saveButton;
 	WebElement cancelButton;
 	WebElement emailIdInput;
@@ -95,7 +100,7 @@ public class WebTable extends TestBase {
 
 	public int totalRowsHavingCellValue(String coulmnName, String cellValue) {
 		int count = 0;
-		for (int j = 0; j < 100; j++) {
+		for (int j = 0; j < this.getPagesInTable(); j++) {
 			for (int i = 0; i < this.getRowsInTable().size(); i++) {
 				if (coulmnName == "Gender") {
 					if (this.getGenders().get(i).getText().equalsIgnoreCase(cellValue)) {
@@ -110,7 +115,7 @@ public class WebTable extends TestBase {
 	public void deleteRowFromTableHavingName(String FirstName) throws InterruptedException {
 		
 		List<WebElement> deleteOption;
-		for (int j = 0; j < 100; j++) {
+		for (int j = 0; j < this.getPagesInTable(); j++) {
 			for (int i = 0; i < this.getRowsInTable().size(); i++) {
 				if (this.getFirstNames().get(i).getText().equalsIgnoreCase(FirstName)) {
 					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -137,7 +142,7 @@ public class WebTable extends TestBase {
 	}
 public void editRowFromTableHavingName(String FirstName,String valueForEdit) throws InterruptedException {
 		
-	for (int j = 0; j < 100; j++) {
+	for (int j = 0; j < this.getPagesInTable(); j++) {
 		for (int i = 0; i < this.getRowsInTable().size(); i++) {
 			if (this.getFirstNames().get(i).getText().equalsIgnoreCase(FirstName)) {
 				actions.doubleClick(this.getEditButtons().get(i)).perform();

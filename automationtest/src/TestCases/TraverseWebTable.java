@@ -23,16 +23,6 @@ public class TraverseWebTable extends TestBase {
 		webTable.printCellValuesHavingEmailId("capellido@mail.com", "Last Name");
 	}
 
-	// Assignment 3-SE Level
-	@Test
-	public void getColumnHeadersFromTable() throws InterruptedException, IOException {
-		WebTable webTable = new WebTable(driver);
-		webTable.skipsign();
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-		webTable.clickOnWebTableMenu();
-		webTable.printColumnHeadersInTable();
-	}
-	
 	//Assignment 2-SE Level
 	@Test
 	public void getTotalCountOfFealeCandidates() {
@@ -44,6 +34,16 @@ public class TraverseWebTable extends TestBase {
 		System.out.println("Total number of female candidates are -"+totalNumberOfFemales);
 	}
 	
+
+	// Assignment 3-SE Level
+	@Test
+	public void getColumnHeadersFromTable() throws InterruptedException, IOException {
+		WebTable webTable = new WebTable(driver);
+		webTable.skipsign();
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		webTable.clickOnWebTableMenu();
+		webTable.printColumnHeadersInTable();
+	}
 	//Assignment 1- SSE Level
 	@Test
 	public void deleteRowsFromTable() throws InterruptedException {
