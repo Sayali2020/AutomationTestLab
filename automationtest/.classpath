@@ -18,5 +18,7 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/sayalic/Downloads/selenium-server-standalone-3.141.59.jar"/>
 	<classpathentry kind="con" path="org.testng.TESTNG_CONTAINER"/>
+	<classpathentry kind="lib" path="C:/Users/sayalic/Downloads/log4j-1.2.17.jar/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="C:/Users/sayalic/Downloads/ashot-1.5.4.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

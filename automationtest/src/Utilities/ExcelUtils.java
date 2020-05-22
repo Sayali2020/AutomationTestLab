@@ -8,17 +8,19 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class ExcelUtils {
-	private  XSSFSheet ExcelWSheet;                                                                     
-	private  XSSFWorkbook ExcelWBook;
-	private  XSSFCell Cell;
-	private  XSSFRow Row;
-	public ExcelUtils(String Path,String SheetName) throws Exception {
-		setExcelFile(Path,SheetName);
+	private XSSFSheet ExcelWSheet;
+	private XSSFWorkbook ExcelWBook;
+	private XSSFCell Cell;
+	private XSSFRow Row;
+
+	public ExcelUtils(String Path, String SheetName) throws Exception {
+		setExcelFile(Path, SheetName);
 	}
 
-	//This method is to set the File path and to open the Excel file, Pass Excel Path and Sheetname as Arguments to this method
+	// This method is to set the File path and to open the Excel file, Pass Excel
+	// Path and Sheetname as Arguments to this method
 
-	public void setExcelFile(String Path,String SheetName) throws Exception {
+	public void setExcelFile(String Path, String SheetName) throws Exception {
 
 		try {
 
@@ -32,7 +34,7 @@ public class ExcelUtils {
 
 			ExcelWSheet = ExcelWBook.getSheet(SheetName);
 
-		} catch (Exception e){
+		} catch (Exception e) {
 
 			throw (e);
 
@@ -40,11 +42,12 @@ public class ExcelUtils {
 
 	}
 
-	//This method is to read the test data from the Excel cell, in this we are passing parameters as Row num and Col num
+	// This method is to read the test data from the Excel cell, in this we are
+	// passing parameters as Row num and Col num
 
-	public String getCellData(int RowNum, int ColNum) throws Exception{
+	public String getCellData(int RowNum, int ColNum) throws Exception {
 
-		try{
+		try {
 
 			Cell = ExcelWSheet.getRow(RowNum).getCell(ColNum);
 
@@ -52,21 +55,22 @@ public class ExcelUtils {
 
 			return CellData;
 
-		}catch (Exception e){
+		} catch (Exception e) {
 
-			return"";
+			return "";
 
 		}
 
 	}
 
-	//This method is to write in the Excel cell, Row num and Col num are the parameters
+	// This method is to write in the Excel cell, Row num and Col num are the
+	// parameters
 
-	public void setCellData(String Result,  int RowNum, int ColNum) throws Exception	{
+	public void setCellData(String Result, int RowNum, int ColNum) throws Exception {
 
-		try{
+		try {
 
-			Row  = ExcelWSheet.getRow(RowNum);
+			Row = ExcelWSheet.getRow(RowNum);
 
 			Cell = Row.getCell(ColNum);
 
@@ -84,7 +88,8 @@ public class ExcelUtils {
 
 			// Constant variables Test Data path and Test Data file name
 
-			FileOutputStream fileOut = new FileOutputStream(TestBase.prop.getProperty("Path_TestData") + TestBase.prop.getProperty("File_TestData"));
+			FileOutputStream fileOut = new FileOutputStream(
+					TestBase.prop.getProperty("Path_TestData") + TestBase.prop.getProperty("File_TestData"));
 
 			ExcelWBook.write(fileOut);
 
@@ -92,13 +97,12 @@ public class ExcelUtils {
 
 			fileOut.close();
 
-		}catch(Exception e){
+		} catch (Exception e) {
 
 			throw (e);
 
 		}
 
 	}
-
 
 }

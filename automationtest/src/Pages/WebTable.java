@@ -1,5 +1,7 @@
 package Pages;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -21,10 +23,8 @@ public class WebTable extends TestBase {
 	public WebTable(WebDriver driver) {
 		this.driver = driver;
 		this.prop = TestBase.prop;
-		 this.actions= new Actions(this.driver);
+		this.actions = new Actions(this.driver);
 	}
-
-//	public WebElement WebTable = driver.findElement(By.cssSelector(prop.getProperty("webTable")));
 
 	public void skipsign() {
 		driver.findElement(By.id(prop.getProperty("skipSign"))).click();
@@ -59,7 +59,8 @@ public class WebTable extends TestBase {
 	}
 
 	public void clickOnNextButton() {
-		driver.findElement(By.cssSelector(prop.getProperty("nextPageButton"))).click();;
+		driver.findElement(By.cssSelector(prop.getProperty("nextPageButton"))).click();
+		;
 	}
 
 	public List<WebElement> getColumnHeaders() {
@@ -70,18 +71,19 @@ public class WebTable extends TestBase {
 		return getWebTable().findElements(By.cssSelector(prop.getProperty("deleteButton")));
 	}
 
-	public List<WebElement> getEditButtons(){
+	public List<WebElement> getEditButtons() {
 		return getWebTable().findElements(By.cssSelector(prop.getProperty("editButton")));
 	}
+
 	public int getPagesInTable() {
-		return	Integer.parseInt(driver.findElement(By.cssSelector(".ui-grid-pager-max-pages-number")).getText().substring(2));
+		return Integer
+				.parseInt(driver.findElement(By.cssSelector(".ui-grid-pager-max-pages-number")).getText().substring(2));
 	}
-	
-	WebElement pageNumbers=driver.findElement(By.cssSelector(".ui-grid-pager-max-pages-number"));
+
 	WebElement saveButton;
 	WebElement cancelButton;
 	WebElement emailIdInput;
-	
+
 	public void printColumnHeadersInTable() {
 		for (int i = 0; i < getColumnHeaders().size(); i++) {
 			System.out.println("Column header- " + getColumnHeaders().get(i).getText());
@@ -112,8 +114,9 @@ public class WebTable extends TestBase {
 		}
 		return count;
 	}
+
 	public void deleteRowFromTableHavingName(String FirstName) throws InterruptedException {
-		
+
 		List<WebElement> deleteOption;
 		for (int j = 0; j < this.getPagesInTable(); j++) {
 			for (int i = 0; i < this.getRowsInTable().size(); i++) {
@@ -140,34 +143,50 @@ public class WebTable extends TestBase {
 
 		}
 	}
-public void editRowFromTableHavingName(String FirstName,String valueForEdit) throws InterruptedException {
-		
-	for (int j = 0; j < this.getPagesInTable(); j++) {
-		for (int i = 0; i < this.getRowsInTable().size(); i++) {
-			if (this.getFirstNames().get(i).getText().equalsIgnoreCase(FirstName)) {
-				actions.doubleClick(this.getEditButtons().get(i)).perform();
-				driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-				System.out.println("Clicked on Edit button of person having name "+FirstName);
-				emailIdInput = this.getWebTable()
-						.findElement(By.cssSelector(prop.getProperty("emailIdCellValue") + " input"));
-				emailIdInput.clear();
-				emailIdInput.sendKeys(valueForEdit);
-				System.out.println("Email Id is entered in email id input field");
-				saveButton = driver.findElement(By.cssSelector(
-						"div.ui-grid-row>div>div[id$='-" + i + "-uiGrid-000B-cell'] div>save-click button"));
 
-				cancelButton = driver.findElement(By.cssSelector(
-						"div.ui-grid-row>div>div[id$='-" + i + "-uiGrid-000B-cell'] div>cancel-click button"));
-				cancelButton.click();
-				// Validate the row is update with email address or not
+	public void editRowFromTableHavingName(String FirstName, String valueForEdit) throws InterruptedException {
+
+		for (int j = 0; j < this.getPagesInTable(); j++) {
+			for (int i = 0; i < this.getRowsInTable().size(); i++) {
+				if (this.getFirstNames().get(i).getText().equalsIgnoreCase(FirstName)) {
+					actions.doubleClick(this.getEditButtons().get(i)).perform();
+					driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+					System.out.println("Clicked on Edit button of person having name " + FirstName);
+					emailIdInput = this.getWebTable()
+							.findElement(By.cssSelector(prop.getProperty("emailIdCellValue") + " input"));
+					emailIdInput.clear();
+					emailIdInput.sendKeys(valueForEdit);
+					System.out.println("Email Id is entered in email id input field");
+					saveButton = driver.findElement(By.cssSelector(
+							"div.ui-grid-row>div>div[id$='-" + i + "-uiGrid-000B-cell'] div>save-click button"));
+
+					cancelButton = driver.findElement(By.cssSelector(
+							"div.ui-grid-row>div>div[id$='-" + i + "-uiGrid-000B-cell'] div>cancel-click button"));
+					cancelButton.click();
+					// Validate the row is update with email address or not
 //					Assert.assertEquals(emailIds.get(i).getText(), "qqqqqqqqqqqqqqqq@gmail.com");
 
+				}
+
 			}
+			this.clickOnNextButton();
 
 		}
-		this.clickOnNextButton();
 
 	}
 
+	public void getSortedArrayList() {
+
+		ArrayList<String> firstNameList = new ArrayList<>();
+		for (int j = 0; j < this.getPagesInTable(); j++) {
+			for (int i = 0; i < this.getRowsInTable().size(); i++) {
+				firstNameList.add(this.getFirstNames().get(i).getText());
+			}
+			this.clickOnNextButton();
+		}
+		Collections.sort(firstNameList);
+		for (String sortedList : firstNameList) {
+			System.out.println(sortedList);
+		}
 	}
 }
